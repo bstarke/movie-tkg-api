@@ -2,7 +2,6 @@ package net.starkenberg.movies.inventory;
 
 import net.starkenberg.movies.cinema.Movie;
 import net.starkenberg.movies.cinema.MovieRepository;
-import net.starkenberg.movies.imdb.ImdbService;
 import net.starkenberg.movies.user.User;
 import net.starkenberg.movies.user.UserService;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
@@ -17,14 +16,12 @@ import java.util.Set;
 public class MovieItemService {
     private final MovieItemRepository movieItemRepository;
     private final MovieRepository movieRepository;
-    private final ImdbService imdbService;
     private final MediumRepository mediumRepository;
     private final UserService userService;
 
-    public MovieItemService(MovieItemRepository movieItemRepository, MovieRepository movieRepository, ImdbService imdbService, MediumRepository mediumRepository, UserService userService) {
+    public MovieItemService(MovieItemRepository movieItemRepository, MovieRepository movieRepository, MediumRepository mediumRepository, UserService userService) {
         this.movieItemRepository = movieItemRepository;
         this.movieRepository = movieRepository;
-        this.imdbService = imdbService;
         this.mediumRepository = mediumRepository;
         this.userService = userService;
     }
@@ -33,16 +30,6 @@ public class MovieItemService {
         Optional<MovieItem> movieItem = movieItemRepository.findById(id);
         if (movieItem.isPresent()) {
             return movieItem.get();
-        }
-        return null;
-    }
-
-    public MovieItem addToInventory(String imdbID, MediaType mediaType, String location, User user) {
-        Movie movie = getMovie(imdbID);
-        if (movie != null) {
-            MovieItem movieItem = getMovieItem(movie, user);
-            addLocationIfMissing(movieItem, mediaType, location);
-            return movieItem;
         }
         return null;
     }
@@ -70,17 +57,6 @@ public class MovieItemService {
             medium = mediumRepository.save(medium);
         }
         return medium;
-    }
-
-    private Movie getMovie(String imdbID) {
-        Movie movie = movieRepository.findByImdbID(imdbID);
-        if (movie == null || movie.getId() == null) {
-            movie = imdbService.getImdbMovie(imdbID);
-            if (movie != null) {
-                movie = movieRepository.save(movie);
-            }
-        }
-        return movie;
     }
 
     private MovieItem getMovieItem(Movie movie, User user) {

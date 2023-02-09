@@ -2,14 +2,14 @@ package net.starkenberg.movies.cinema;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import static jakarta.persistence.GenerationType.AUTO;
 
 @Getter
 @Setter
@@ -17,14 +17,14 @@ import javax.persistence.Id;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Movie {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy = AUTO)
+    private Integer id;
     @Column(unique = true)
     public String imdbID;
     @JsonProperty("Title")
     public String title;
     @JsonProperty("Year")
-    public String year;
+    public String releaseYear;
     @JsonProperty("Rated")
     public String rated;
     @JsonProperty("Released")
