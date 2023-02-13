@@ -1,6 +1,5 @@
 package net.starkenberg.movies.inventory;
 
-import net.starkenberg.movies.cinema.Movie;
 import net.starkenberg.movies.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -21,6 +20,4 @@ public interface MovieItemRepository extends JpaRepository<MovieItem, Long> {
     @Query(value = "SELECT mi FROM MovieItem mi LEFT JOIN FETCH mi.movie LEFT JOIN FETCH mi.media WHERE mi.owner = :owner AND mi.movie.imdbID = :imdbId")
     MovieItem findByOwnerAndImdbId(User owner, String imdbId);
 
-    @Query(value = "SELECT mi FROM MovieItem mi LEFT JOIN FETCH mi.movie LEFT JOIN FETCH mi.media WHERE mi.owner = :owner AND mi.movie = :movie")
-    MovieItem findByMovieAndOwner(Movie movie, User owner);
 }

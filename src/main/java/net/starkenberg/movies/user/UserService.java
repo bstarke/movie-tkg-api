@@ -28,7 +28,4 @@ public class UserService {
         return repo.findByEmail(email);
     }
 
-    public User getUserById(String userId) {
-        return repo.findByUserId(userId);
-    }
 }

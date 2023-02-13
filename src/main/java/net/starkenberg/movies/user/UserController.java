@@ -14,12 +14,12 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/v1/users")
+@RequestMapping(path = UserController.myPath)
 public class UserController {
+    public static final String myPath = "/v1/users/";
+
     private final UserRepository repo;
     private final UserService service;
-
-    private String myPath = "/v1/users/";
 
     public UserController(UserRepository repo, UserService service) {
         this.repo = repo;
