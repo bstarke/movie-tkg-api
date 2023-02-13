@@ -16,7 +16,7 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "users")
-@JsonIgnoreProperties({"movieItems"})
+@JsonIgnoreProperties({"movieItems"}) // TODO Test removal of this
 public class User {
     @Id
     private String id;

@@ -20,7 +20,7 @@ import static jakarta.persistence.GenerationType.AUTO;
 @Getter
 @Setter
 @Entity
-@JsonIgnoreProperties({"owner"})
+@JsonIgnoreProperties({"owner"}) // to avoid infinite loop on serialization
 @Table(name = "movie_inventory", uniqueConstraints = { @UniqueConstraint(columnNames = { "movie_id" }) } )
 public class MovieItem {
     @Id
