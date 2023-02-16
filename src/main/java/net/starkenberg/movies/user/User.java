@@ -8,6 +8,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import net.starkenberg.movies.inventory.MovieItem;
 
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
+@ToString
 @Table(name = "users")
 @JsonIgnoreProperties({"movieItems"}) // TODO Test removal of this
 public class User {

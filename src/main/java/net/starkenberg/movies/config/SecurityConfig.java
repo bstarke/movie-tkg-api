@@ -14,10 +14,11 @@ public class SecurityConfig {
     protected SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .authorizeHttpRequests()
-                .requestMatchers("/actuator/**", "/v1/plex/**").permitAll()
-                .and().authorizeHttpRequests()
-                .anyRequest().authenticated()
-                .and().oauth2ResourceServer().jwt();
+                .requestMatchers("/**").permitAll();
+//                .requestMatchers("/actuator/**").permitAll();
+//                .and().authorizeHttpRequests()
+//                .anyRequest().authenticated()
+//                .and().oauth2ResourceServer().jwt();
         return httpSecurity.build();
     }
 }

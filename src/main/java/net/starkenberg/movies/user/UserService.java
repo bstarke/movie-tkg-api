@@ -1,8 +1,10 @@
 package net.starkenberg.movies.user;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 public class UserService {
     private final UserRepository repo;
@@ -26,6 +28,15 @@ public class UserService {
 
     public User getUserByEmail(String email) {
         return repo.findByEmail(email);
+    }
+
+    public User getUserByUID(String uid) {
+        log.debug("UID: {}", uid);
+        User user = repo.findAll().get(0);
+        log.debug("User: {}", user.getEmail());
+        user = repo.findByUserId(uid);
+        log.debug("User: {}", user.getId());
+        return user;
     }
 
 }

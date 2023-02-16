@@ -24,7 +24,7 @@ public class Movie {
     @JsonProperty("Title")
     public String title;
     @JsonProperty("Year")
-    public Short releaseYear;
+    public Short ryear;
     @JsonProperty("Rated")
     public String rated;
     @JsonProperty("Released")

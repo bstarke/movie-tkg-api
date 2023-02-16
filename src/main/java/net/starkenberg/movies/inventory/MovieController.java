@@ -26,7 +26,8 @@ public class MovieController {
 
     @GetMapping
     public ResponseEntity<List<MovieItem>> getMovies(JwtAuthenticationToken authenticationToken) {
-        log.info("Email: " + authenticationToken.getToken().getClaimAsString("email"));
+        if (authenticationToken != null)
+            log.info("Email: " + authenticationToken.getToken().getClaimAsString("email"));
         List<MovieItem> movies = movieItemService.getAll(authenticationToken);
         if (movies != null)
             return new ResponseEntity<>(movies, HttpStatus.OK);
